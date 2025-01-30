@@ -7,20 +7,20 @@ import {
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu";
   import { MenuIcon } from "lucide-react";
- /*  import {
+  import {
     RegisterLink,
     LoginLink,
     LogoutLink,
   } from "@kinde-oss/kinde-auth-nextjs/components";
-  import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server"; */
+  import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
   import Link from "next/link";
   /* import { createAirbnbHome } from "../actions"; */
   
   export async function UserNav() {
-    /* const { getUser } = getKindeServerSession();
+    const { getUser } = getKindeServerSession();
     const user = await getUser();
   
-    const createHomewithId = createAirbnbHome.bind(null, {
+   /*  const createHomewithId = createAirbnbHome.bind(null, {
       userId: user?.id as string,
     }); */
   
@@ -32,7 +32,7 @@ import {
   
             <img
               src={
-                /* user?.picture ?? */
+                user?.picture ??
                 "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
               }
               alt="Image of the user"
@@ -41,14 +41,14 @@ import {
           </div>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[200px]">
-         {/*  {user ? (
+          {user ? (
             <>
               <DropdownMenuItem>
-                <form action={createHomewithId} className="w-full">
+                {/* <form action={createHomewithId} className="w-full">
                   <button type="submit" className="w-full text-start">
                     Airbnb your Home
                   </button>
-                </form>
+                </form> */}form
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Link href="/my-homes" className="w-full">
@@ -71,15 +71,15 @@ import {
               </DropdownMenuItem>
             </>
           ) : (
-            <> */}
+            <>
               <DropdownMenuItem>
-                {/* <RegisterLink className="w-full"> */}Register{/* </RegisterLink> */}
+                <RegisterLink className="w-full">Register</RegisterLink>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                {/* <LoginLink className="w-full"> */}Login{/* </LoginLink> */}
+                <LoginLink className="w-full">Login</LoginLink>
               </DropdownMenuItem>
-         {/*    </>
-          )} */}
+            </>
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
     );
