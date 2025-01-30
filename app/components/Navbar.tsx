@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import DesktopLogo from "../../public/airbnb-desktop.png";
-import MobileLogo from "../../public/airbnb-mobile.webp";
+import DesktopLogo from "../../public/desktop2.png";
+import MobileLogo from "../../public/mobile2.png";
 import { UserNav } from "./UserNav";
 /* import { SearchModalCompnent } from "./SearchComponent"; */
 
@@ -13,13 +13,13 @@ export function Navbar() {
           <Image
             src={DesktopLogo}
             alt="Desktop Logo"
-            className="w-32 hidden lg:block"
+            className="w-48 h-14 hidden lg:block"
           />
 
           <Image
             src={MobileLogo}
             alt="Mobile Logo"
-            className="block lg:hidden w-12"
+            className="block lg:hidden w-14 h-10"
           />
         </Link>
 
