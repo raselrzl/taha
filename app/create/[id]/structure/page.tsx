@@ -1,8 +1,10 @@
 import { createCategoryPage } from "@/app/actions";
 import { CreatioBottomBar } from "@/app/components/CreationBottomBar";
 import { SelctetCategory } from "@/app/components/SelectedCategory";
+import { use } from "react";
 
-export default function StrucutreRoute({ params }: { params: { id: string } }) {
+export default function StrucutreRoute({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = use(params);
   return (
     <>
       <div className="w-3/5 mx-auto">
@@ -12,7 +14,7 @@ export default function StrucutreRoute({ params }: { params: { id: string } }) {
       </div>
 
       <form action={createCategoryPage}>
-      <input type="hidden" name="homeId" value={params.id ?? ""} />
+      <input type="hidden" name="homeId" value={id ?? ""} />
         <SelctetCategory />
 
         <CreatioBottomBar />
