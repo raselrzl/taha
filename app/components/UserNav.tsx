@@ -14,15 +14,15 @@ import {
   } from "@kinde-oss/kinde-auth-nextjs/components";
   import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
   import Link from "next/link";
-  /* import { createAirbnbHome } from "../actions"; */
+  import { createAirbnbHome } from "../actions";
   
   export async function UserNav() {
     const { getUser } = getKindeServerSession();
     const user = await getUser();
   
-   /*  const createHomewithId = createAirbnbHome.bind(null, {
+    const createHomewithId = createAirbnbHome.bind(null, {
       userId: user?.id as string,
-    }); */
+    });
   
     return (
       <DropdownMenu>
@@ -44,11 +44,11 @@ import {
           {user ? (
             <>
               <DropdownMenuItem>
-                {/* <form action={createHomewithId} className="w-full">
+                <form action={createHomewithId} className="w-full">
                   <button type="submit" className="w-full text-start">
-                    Airbnb your Home
+                    HT your Home
                   </button>
-                </form> */}form
+                </form>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Link href="/my-homes" className="w-full">
