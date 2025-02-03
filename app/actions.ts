@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import prisma from "./lib/db";
-/* import { supabase } from "./lib/supabase"; */
+import { supabase } from "./lib/supabase";
 import { revalidatePath } from "next/cache";
 import path from "path";
 
@@ -32,7 +32,7 @@ export async function createAirbnbHome({ userId }: { userId: string }) {
     return redirect(`/create/${data.id}/structure`);
   } else if (data.addedCategory && !data.addedDescription) {
     return redirect(`/create/${data.id}/description`);
-  }  /* else if (
+  }  else if (
     data.addedCategory &&
     data.addedDescription &&
     !data.addedLoaction
@@ -50,7 +50,7 @@ export async function createAirbnbHome({ userId }: { userId: string }) {
     });
 
     return redirect(`/create/${data.id}/structure`);
-  } */
+  }
 }
 
 export async function createCategoryPage(formData: FormData) {
@@ -68,7 +68,7 @@ export async function createCategoryPage(formData: FormData) {
 
   return redirect(`/create/${homeId}/description`);
 }
-/* 
+
 export async function CreateDescription(formData: FormData) {
   const title = formData.get("title") as string;
   const description = formData.get("description") as string;
@@ -121,7 +121,7 @@ export async function createLocation(formData: FormData) {
 
   return redirect("/");
 }
-
+/* 
 export async function addToFavorite(formData: FormData) {
   const homeId = formData.get("homeId") as string;
   const userId = formData.get("userId") as string;
