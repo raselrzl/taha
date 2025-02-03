@@ -16,14 +16,21 @@ import { Skeleton } from "@/components/ui/skeleton";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 
-export default function AddressRoutw({ params }: { params: { id: string } }) {
+// Correct type for params (Fixes the error)
+interface AddressRouteProps {
+  params: { id: string };
+}
+
+export default function AddressRoute({ params }: AddressRouteProps) {
   const { getAllCountries } = useCountries();
+  const countries = getAllCountries() || [];
   const [locationValue, setLocationValue] = useState("");
 
   const LazyMap = dynamic(() => import("@/app/components/Map"), {
     ssr: false,
     loading: () => <Skeleton className="h-[50vh] w-full" />,
   });
+
   return (
     <>
       <div className="w-3/5 mx-auto">
@@ -35,16 +42,21 @@ export default function AddressRoutw({ params }: { params: { id: string } }) {
       <form action={createLocation}>
         <input type="hidden" name="homeId" value={params.id} />
         <input type="hidden" name="countryValue" value={locationValue} />
+
         <div className="w-3/5 mx-auto mb-36">
           <div className="mb-5">
-            <Select required onValueChange={(value) => setLocationValue(value)}>
+            <Select
+              required
+              onValueChange={(value) => setLocationValue(value)}
+              defaultValue={locationValue}
+            >
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select a Country" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
                   <SelectLabel>Countries</SelectLabel>
-                  {getAllCountries().map((item) => (
+                  {countries.map((item) => (
                     <SelectItem key={item.value} value={item.value}>
                       {item.label}
                     </SelectItem>
