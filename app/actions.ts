@@ -6,7 +6,7 @@ import { supabase } from "./lib/supabase";
 import { revalidatePath } from "next/cache";
 import path from "path";
 
-export async function createAirbnbHome({ userId }: { userId: string }) {
+/* export async function createAirbnbHome({ userId }: { userId: string }) {
   const data = await prisma.home.findFirst({
     where: {
       userId: userId,
@@ -51,7 +51,37 @@ export async function createAirbnbHome({ userId }: { userId: string }) {
 
     return redirect(`/create/${data.id}/structure`);
   }
-}
+} */
+
+  export async function createAirbnbHome({ userId }: { userId: string }) {
+    const data = await prisma.home.findFirst({
+      where: {
+        userId: userId,
+      },
+      orderBy: {
+        createdAT: "desc", // Fix case sensitivity
+      },
+    });
+  
+    if (data === null) {
+      const newData = await prisma.home.create({
+        data: {
+          userId: userId,
+        },
+      });
+  
+      return redirect(`/create/${newData.id}/structure`);
+    } else if (!data.addedCategory && !data.addedDescription && !data.addedLoaction) {
+      return redirect(`/create/${data.id}/structure`);
+    } else if (data.addedCategory && !data.addedDescription) {
+      return redirect(`/create/${data.id}/description`);
+    } else if (data.addedCategory && data.addedDescription && !data.addedLoaction) {
+      return redirect(`/create/${data.id}/address`);
+    }
+  
+    return redirect(`/create/${data.id}/structure`); // Fix unnecessary re-creation of a home
+  }
+  
 
 export async function createCategoryPage(formData: FormData) {
   const categoryName = formData.get("categoryName") as string;
