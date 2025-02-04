@@ -10,22 +10,23 @@ export default async function DescriptionPage({ params: paramsPromise }: { param
   const params = await paramsPromise;
   return (
     <>
-      <div className="w-3/5 mx-auto mt-6">
-        <h2 className="text-3xl font-semibold tracking-tight transition-colors">
-          Please describe your home as good as you can!
+      <div className="container mx-auto px-5 lg:px-10 mt-10">
+        <h2 className="text-3xl font-semibold tracking-tight transition-colors text-center">
+          Please describe your advertisement as good as you can!
         </h2>
       </div>
 
       <form action={CreateDescription}>
         <input type="hidden" name="homeId" value={params.id} />
-        <div className="mx-auto w-3/5 mt-10 flex flex-col gap-y-5 mb-36">
+        <div className="mx-auto w-4/5 mt-10 grid grid-cols-1 md:px-32 gap-5 mb-36">
+
           <div className="flex flex-col gap-y-2">
             <Label>Title</Label>
             <Input
               name="title"
               type="text"
               required
-              placeholder="Short and simple..."
+              placeholder="Villa, Apartment, Room..."
             />
           </div>
           <div className="flex flex-col gap-y-2">
@@ -33,7 +34,7 @@ export default async function DescriptionPage({ params: paramsPromise }: { param
             <Textarea
               name="description"
               required
-              placeholder="Please describe your home..."
+              placeholder="Please describe your advertisement..."
             />
           </div>
 
