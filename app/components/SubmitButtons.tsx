@@ -22,7 +22,7 @@ export function CreationSubmit() {
   );
 }
 
-/* export function AddToFavoriteButton() {
+export function AddToFavoriteButton() {
   const { pending } = useFormStatus();
   return (
     <>
@@ -75,7 +75,7 @@ export function DeleteFromFavoriteButton() {
     </>
   );
 }
-
+/* 
 export function ReservationSubmitButton() {
   const { pending } = useFormStatus();
 

@@ -39,11 +39,11 @@ async function getData({
       price: true,
       description: true,
       country: true,
-      /* Favorite: {
+      Favorite: {
         where: {
           userId: userId ?? undefined,
         },
-      }, */
+      },
     },
   });
 
@@ -107,11 +107,11 @@ async function ShowItems({
               imagePath={item.photo as string}
               location={item.country as string}
               price={item.price as number}
-              /* userId={user?.id}
+              userId={user?.id}
               favoriteId={item.Favorite[0]?.id}
-              isInFavoriteList={item.Favorite.length > 0 ? true : false} */
+              isInFavoriteList={item.Favorite.length > 0 ? true : false}
               homeId={item.id}
-              /* pathName="/" */
+              pathName="/"
             />
           ))}
         </div>
