@@ -10,14 +10,14 @@ export function SelctetCategory() {
     undefined
   );
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-10 w-4/5 mx-auto mb-36 md:w-3/5">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-8 mt-10 w-4/5 mx-auto mb-36 md:w-3/5">
       <input
         type="hidden"
         name="categoryName"
         value={selectedCategory ||"" as string}
       />
       {categoryItems.map((item) => (
-        <div key={item.id} className="cursor-pointer text-xs sm:text-base">
+        <div key={item.id} className="cursor-pointer text-xs md:text-base sm:text-base">
           <Card
             className={selectedCategory === item.name ? "border-primary" : ""}
             onClick={() => setSelectredCategory(item.name)}
