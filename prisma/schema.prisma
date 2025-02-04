@@ -19,8 +19,8 @@ model User {
   lastName     String
   profileImage String?
   Home         Home[]
-  Favorite     Favorite[]/* 
-  Reservation  Reservation[] */
+  Favorite     Favorite[]
+  Reservation  Reservation[]
 }
 
 model Home {
@@ -35,8 +35,8 @@ model Home {
   photo        String?
   price        Int?
   categoryName String? 
-  Favorite     Favorite[]/*
-  Reservation  Reservation[] */
+  Favorite     Favorite[]
+  Reservation  Reservation[]
 
   addedCategory    Boolean @default(false)
   addedDescription Boolean @default(false)
@@ -57,7 +57,7 @@ model Favorite {
 
   createAt DateTime @default(now())
 }
-/* 
+
 model Reservation {
   id String @id @default(uuid())
 
@@ -69,4 +69,4 @@ model Reservation {
   userId String?
   Home   Home?   @relation(fields: [homeId], references: [id])
   homeId String?
-} */
+}

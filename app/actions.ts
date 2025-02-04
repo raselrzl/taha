@@ -181,7 +181,7 @@ export async function DeleteFromFavorite(formData: FormData) {
 
   revalidatePath(pathName);
 }
-/* 
+
 export async function createReservation(formData: FormData) {
   const userId = formData.get("userId") as string;
   const homeId = formData.get("homeId") as string;
@@ -198,4 +198,4 @@ export async function createReservation(formData: FormData) {
   });
 
   return redirect("/");
-} */
+}

@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 
-/* import { createReservation } from "@/app/actions"; */
+import { createReservation } from "@/app/actions";
 import { CaegoryShowcase } from "@/app/components/CategoryShowcase"; 
-import { HomeMap } from "@/app/components/HomeMap";/*
+import { HomeMap } from "@/app/components/HomeMap";
 import { SelectCalender } from "@/app/components/SelectCalender";
-import { ReservationSubmitButton } from "@/app/components/SubmitButtons"; */
+import { ReservationSubmitButton } from "@/app/components/SubmitButtons";
 import prisma from "@/app/lib/db";
 import { useCountries } from "@/app/lib/getCountries";
 import { Button } from "@/components/ui/button";
@@ -31,11 +31,11 @@ async function getData(homeid: string) {
       categoryName: true,
       price: true,
       country: true,
-      /* Reservation: {
+      Reservation: {
         where: {
           homeId: homeid,
-        }, */
-      /* }, */
+        },
+      },
 
       User: {
         select: {
@@ -106,19 +106,19 @@ export default async function HomeRoute({ params: paramsPromise }: { params: Pro
           <HomeMap locationValue={country?.value as string} />
         </div>
 
-        <form /* action={createReservation} */>
+        <form action={createReservation}>
           <input type="hidden" name="homeId" value={params.id} />
           <input type="hidden" name="userId" value={user?.id} />
 
-         {/*  <SelectCalender reservation={data?.Reservation} />
+         <SelectCalender reservation={data?.Reservation} /> 
 
           {user?.id ? (
             <ReservationSubmitButton />
-          ) : ( */}
+          ) : (
             <Button className="w-full" asChild>
               <Link href="/api/auth/login">Make a Reservation</Link>
             </Button>
-        {/* /*   )} */ }
+        )}
         </form>
       </div>
     </div>

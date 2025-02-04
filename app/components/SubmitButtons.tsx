@@ -75,7 +75,7 @@ export function DeleteFromFavoriteButton() {
     </>
   );
 }
-/* 
+
 export function ReservationSubmitButton() {
   const { pending } = useFormStatus();
 
@@ -93,4 +93,3 @@ export function ReservationSubmitButton() {
     </>
   );
 }
- */
