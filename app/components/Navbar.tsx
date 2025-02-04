@@ -3,7 +3,7 @@ import Link from "next/link";
 import DesktopLogo from "../../public/desktop2.png";
 import MobileLogo from "../../public/mobile2.png";
 import { UserNav } from "./UserNav";
-/* import { SearchModalCompnent } from "./SearchComponent"; */
+import { SearchModalCompnent } from "./SearchComponent";
 
 export function Navbar() {
   return (
@@ -23,7 +23,7 @@ export function Navbar() {
           />
         </Link>
 
-        {/* <SearchModalCompnent /> */}
+        <SearchModalCompnent />
 
         <UserNav />
       </div>
