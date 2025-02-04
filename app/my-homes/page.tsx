@@ -44,7 +44,7 @@ export default async function MyHomes() {
   const data = await getData(user.id);
   return (
     <section className="container mx-auto px-5 lg:px-10 mt-10">
-      <h2 className="text-3xl font-semibold tracking-tight">Your Homes</h2>
+      <h2 className="text-3xl font-semibold tracking-tight text-center">My Advertising List</h2>
 
       {data.length === 0 ? (
         <NoItems

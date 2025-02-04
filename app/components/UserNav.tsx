@@ -10,7 +10,7 @@ import {
   import {
     RegisterLink,
     LoginLink,
-    LogoutLink,
+    LogoutLink, 
   } from "@kinde-oss/kinde-auth-nextjs/components";
   import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
   import Link from "next/link";
@@ -46,18 +46,18 @@ import {
               <DropdownMenuItem>
                 <form action={createHomewithId} className="w-full">
                   <button type="submit" className="w-full text-start">
-                    HT your Home
+                    Add Advertisement
                   </button>
                 </form>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Link href="/my-homes" className="w-full">
-                  My Listings
+                  My Advertisement Lists
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Link href="/favorites" className="w-full">
-                  My Favorites
+                  My Favorites list
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>

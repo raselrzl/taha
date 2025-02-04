@@ -34,12 +34,13 @@ export function ListingCard({
 
   return (
     <div className="flex flex-col">
+      
       <div className="relative h-72">
         <Image
           src={`https://fnozlcmlibrmmxoeelqc.supabase.co/storage/v1/object/public/images/${imagePath}`}
           alt="Image of House"
           fill
-          className="rounded-lg h-full object-cover"
+          className="h-full object-cover"
         /> 
 
         {userId && (
@@ -66,9 +67,9 @@ export function ListingCard({
 
       <Link href={`/home/${homeId}`} className="mt-2">
         <h3 className="font-medium text-base">
-          {country?.flag} {country?.label} / {country?.region}
+         {/*  {country?.flag}  */}{country?.label} {/* / {country?.region} */}
         </h3>
-        <p className="text-muted-foreground text-sm line-clamp-2">
+        <p className="text-muted-foreground text-xs line-clamp-2">
           {description}
         </p>
         <p className="pt-2 text-muted-foreground">

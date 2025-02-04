@@ -29,7 +29,7 @@ export default function AddressRoute(/* { params }: { params: { id: string } } *
   });
   return (
     <>
-      <div className="w-3/5 mx-auto">
+      <div className="w-3/5 mx-auto mt-6">
         <h2 className="text-3xl font-semibold tracking-tight transition-colors mb-10">
           Where is your Home located?
         </h2>

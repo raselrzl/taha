@@ -38,9 +38,9 @@ export default async function ReservationsRoute() {
   if (!user?.id) return redirect("/");
   const data = await getData(user.id);
   return (
-    <section className="container mx-atuo px-5 lg:px-10 mt-10">
-      <h2 className="text-3xl font-semibold tracking-tight">
-        Your Reservations
+    <section className="container mx-auto px-5 lg:px-10 mt-10">
+      <h2 className="text-3xl font-semibold tracking-tight text-center">
+        My Reservations list
       </h2>
 
       {data.length === 0 ? (

@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { createReservation } from "@/app/actions";
-import { CaegoryShowcase } from "@/app/components/CategoryShowcase"; 
+import { CaegoryShowcase } from "@/app/components/CategoryShowcase";
 import { HomeMap } from "@/app/components/HomeMap";
 import { SelectCalender } from "@/app/components/SelectCalender";
 import { ReservationSubmitButton } from "@/app/components/SubmitButtons";
@@ -49,7 +49,11 @@ async function getData(homeid: string) {
   return data;
 }
 
-export default async function HomeRoute({ params: paramsPromise }: { params: Promise<{ id: string }> }) {
+export default async function HomeRoute({
+  params: paramsPromise,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const params = await paramsPromise;
   const data = await getData(params.id);
   const { getCountryByValue } = useCountries();
@@ -57,27 +61,28 @@ export default async function HomeRoute({ params: paramsPromise }: { params: Pro
   const { getUser } = getKindeServerSession();
   const user = await getUser();
   return (
-    <div className="w-[75%] mx-auto mt-10 mb-12">
+    <div className="w-full sm:w-[90%] lg:w-[75%] max-w-[1200px] mx-auto mt-10 mb-12 px-4">
       <h1 className="font-medium text-2xl mb-5">{data?.title}</h1>
-      <div className="relative h-[550px]">
+      <div className="relative h-[350px] sm:h-[450px] lg:h-[550px]">
         <Image
           alt="Image of Home"
           src={`https://fnozlcmlibrmmxoeelqc.supabase.co/storage/v1/object/public/images/${data?.photo}`}
           fill
-          className="rounded-lg h-full object-cover w-full"
+          className="h-full object-cover w-full"
         />
       </div>
 
-      <div className="flex justify-between gap-x-24 mt-8">
-        <div className="w-2/3">
+      <div className="flex flex-col lg:flex-row justify-between gap-x-24 gap-y-8 mt-8">
+        <div className="w-full lg:w-2/3">
           <h3 className="text-xl font-medium">
-            {country?.flag} {country?.label} / {country?.region}
+            {/* {country?.flag}  */}
+            {country?.label} {/* / {country?.region} */}
           </h3>
-          <div className="flex gap-x-2 text-muted-foreground">
+          <div className="flex flex-row gap-x-1 text-muted-foreground text-xs">
             <p>{data?.guests} Guests</p> * <p>{data?.bedrooms} Bedrooms</p> *{" "}
             {data?.bathrooms} Bathrooms
           </div>
- 
+
           <div className="flex items-center mt-6">
             <img
               src={
@@ -93,7 +98,7 @@ export default async function HomeRoute({ params: paramsPromise }: { params: Pro
             </div>
           </div>
 
-        <Separator className="my-7" />  
+          <Separator className="my-7" />
 
           <CaegoryShowcase categoryName={data?.categoryName as string} />
 
@@ -106,11 +111,11 @@ export default async function HomeRoute({ params: paramsPromise }: { params: Pro
           <HomeMap locationValue={country?.value as string} />
         </div>
 
-        <form action={createReservation}>
+        <form action={createReservation} className="w-full lg:w-auto">
           <input type="hidden" name="homeId" value={params.id} />
           <input type="hidden" name="userId" value={user?.id} />
 
-         <SelectCalender reservation={data?.Reservation} /> 
+          <SelectCalender reservation={data?.Reservation} />
 
           {user?.id ? (
             <ReservationSubmitButton />
@@ -118,7 +123,7 @@ export default async function HomeRoute({ params: paramsPromise }: { params: Pro
             <Button className="w-full" asChild>
               <Link href="/api/auth/login">Make a Reservation</Link>
             </Button>
-        )}
+          )}
         </form>
       </div>
     </div>

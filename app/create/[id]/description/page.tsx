@@ -10,7 +10,7 @@ export default async function DescriptionPage({ params: paramsPromise }: { param
   const params = await paramsPromise;
   return (
     <>
-      <div className="w-3/5 mx-auto">
+      <div className="w-3/5 mx-auto mt-6">
         <h2 className="text-3xl font-semibold tracking-tight transition-colors">
           Please describe your home as good as you can!
         </h2>
