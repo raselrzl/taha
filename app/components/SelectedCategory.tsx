@@ -10,7 +10,7 @@ export function SelctetCategory() {
     undefined
   );
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-10 w-3/5 mx-auto mb-36">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-10 w-4/5 mx-auto mb-36 md:w-3/5">
       <input
         type="hidden"
         name="categoryName"
