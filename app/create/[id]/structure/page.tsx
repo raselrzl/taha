@@ -2,7 +2,10 @@ import { createCategoryPage } from "@/app/actions";
 import { CreatioBottomBar } from "@/app/components/CreationBottomBar";
 import { SelctetCategory } from "@/app/components/SelectedCategory";
 
-export default function StrucutreRoute({ params }: { params: { id: string } }) {
+export default async function StrucutreRoute({ params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  // Await params once before using its properties
+  const params = await paramsPromise;
+
   return (
     <>
       <div className="w-3/5 mx-auto">

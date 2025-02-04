@@ -6,11 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
-export default function DescriptionPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default async function DescriptionPage({ params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   return (
     <>
       <div className="w-3/5 mx-auto">

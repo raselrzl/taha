@@ -1,5 +1,5 @@
-import { Suspense, use } from "react";
 
+import { Suspense, use } from "react";
 import { MapFilterItems } from "./components/MapFilterItems";
 import prisma from "./lib/db";
 import { SkeltonCard } from "./components/SkeletonCard";
@@ -50,17 +50,20 @@ async function getData({
   return data;
 }
 
-export default function Home({
-  searchParams,
+export default async function Home({
+  searchParams: searchParamsPromise,
 }: {
-  searchParams?: {
+  searchParams?: Promise<{
     filter?: string;
     country?: string;
     guest?: string;
     room?: string;
     bathroom?: string;
-  };
+  }>;
 }) {
+  // Await searchParams once before accessing its properties
+  const searchParams = await searchParamsPromise;
+
   return (
     <div className="container mx-auto px-5 lg:px-10">
       <MapFilterItems />
@@ -71,6 +74,7 @@ export default function Home({
     </div>
   );
 }
+
 
 async function ShowItems({
   searchParams,
@@ -103,8 +107,8 @@ async function ShowItems({
               imagePath={item.photo as string}
               location={item.country as string}
               price={item.price as number}
-              /* userId={user?.id} */
-              /* favoriteId={item.Favorite[0]?.id}
+              /* userId={user?.id}
+              favoriteId={item.Favorite[0]?.id}
               isInFavoriteList={item.Favorite.length > 0 ? true : false} */
               homeId={item.id}
               /* pathName="/" */
