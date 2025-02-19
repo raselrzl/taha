@@ -81,7 +81,7 @@ export function MapFilterItems() {
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
-            stroke-width="2"
+            strokeWidth="2"
             d="M15 19l-7-7 7-7"
           />
         </svg>
@@ -102,7 +102,7 @@ export function MapFilterItems() {
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
-            stroke-width="2"
+            strokeWidth="2"
             d="M9 5l7 7-7 7"
           />
         </svg>

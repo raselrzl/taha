@@ -8,7 +8,7 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { ListingCard } from "./components/ListingCard";
 import { unstable_noStore as noStore } from "next/cache";
 
-async function getData({
+/* async function getData({
   searchParams,
   userId,
 }: {
@@ -49,7 +49,7 @@ async function getData({
 
   return data;
 }
-
+ */
 export default async function Home({
   searchParams: searchParamsPromise,
 }: {
@@ -89,11 +89,11 @@ async function ShowItems({
 }) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
-  const data = await getData({ searchParams: searchParams, userId: user?.id });
+  /* const data = await getData({ searchParams: searchParams, userId: user?.id }); */
 
   return (
     <>
-      {data.length === 0 ? (
+     {/*  {data.length === 0 ? (
         <NoItems
           description="Please check a other category or create your own listing!"
           title="Sorry no listings found for this category..."
@@ -115,7 +115,7 @@ async function ShowItems({
             />
           ))}
         </div>
-      )}
+      )} */}
     </>
   );
 }
