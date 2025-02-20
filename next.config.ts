@@ -13,9 +13,13 @@ const nextConfig: NextConfig = {
         protocol: "https",
         port: "",
       },
-    ]
-  }
+    ],
+  },
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '6mb', // adjust this value as needed
+    },
+  },
 };
-
 
 export default nextConfig;
