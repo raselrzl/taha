@@ -34,7 +34,7 @@ model Home {
   country      String?
   photo        String?
   price        Int?
-  categoryName String? 
+  categoryName String?
   Favorite     Favorite[]
   Reservation  Reservation[]
 
@@ -42,9 +42,10 @@ model Home {
   addedDescription Boolean @default(false)
   addedLoaction    Boolean @default(false)
 
-  createdAT DateTime @default(now()) 
-  User      User?    @relation(fields: [userId], references: [id])
-  userId    String?
+  createdAT DateTime @default(now())
+  User      User @relation(fields: [userId], references: [id])
+  userId    String
+
 }
 
 model Favorite {
