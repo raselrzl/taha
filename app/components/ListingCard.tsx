@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCountries } from "../lib/getCountries";
-import { Heart } from "lucide-react";
+import { ArrowBigRight, ArrowDownRight, CircleChevronDown, CircleChevronRight, Heart } from "lucide-react";
 import { AddToFavoriteButton, DeleteFromFavoriteButton } from "./SubmitButtons";
 import { DeleteFromFavorite, addToFavorite } from "../actions";
 
@@ -66,9 +66,14 @@ export function ListingCard({
       </div>
 
       <Link href={`/home/${homeId}`} className="mt-2">
-        <h3 className="font-medium text-base">
-         {/*  {country?.flag}  */}{country?.label} {/* / {country?.region} */}
-        </h3>
+       <div className="flex justify-between">
+
+          <h3 className="font-medium text-base">
+          {/*  {country?.flag}  */}{country?.label} {/* / {country?.region} */}
+          </h3>
+          <CircleChevronRight  className="text-red-300"/>
+       </div>
+        
         <p className="text-muted-foreground text-xs line-clamp-2">
           {description}
         </p>
