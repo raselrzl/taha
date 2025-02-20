@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Hotel",
-  description: "hotel",
+  title: "Rent to Live",
+  description: "Rent to Live",
 };
 
 export default function RootLayout({
@@ -29,7 +29,7 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="hotel" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Hotel</title>
+        <title>Rent to Live</title>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

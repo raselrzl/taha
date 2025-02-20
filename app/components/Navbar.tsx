@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import DesktopLogo from "../../public/desktop2.png";
-import MobileLogo from "../../public/mobile2.png";
+import DesktopLogo from "../../public/rpd.png";
+import MobileLogo from "../../public/rpm.png";
 import { UserNav } from "./UserNav";
 import { SearchModalCompnent } from "./SearchComponent";
 
@@ -13,13 +13,13 @@ export function Navbar() {
           <Image
             src={DesktopLogo}
             alt="Desktop Logo"
-            className="w-48 h-14 hidden lg:block"
+            className="w-full h-16 hidden lg:block"
           />
 
           <Image
             src={MobileLogo}
             alt="Mobile Logo"
-            className="block lg:hidden w-14 h-10"
+            className="block lg:hidden w-16 h-12"
           />
         </Link>
 
