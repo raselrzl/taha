@@ -1,5 +1,8 @@
+// app/users/page.tsx
 import prisma from "@/app/lib/db";
+import { UserList } from "./UserList";
 
+// Fetch users on the server
 async function getUsers() {
   return await prisma.user.findMany({
     select: {
@@ -7,6 +10,7 @@ async function getUsers() {
       firstName: true,
       lastName: true,
       email: true,
+      isAdmin: true,
       profileImage: true,
     },
   });
@@ -22,24 +26,7 @@ export default async function UsersPage() {
       {users.length === 0 ? (
         <p className="text-center mt-6">No users found.</p>
       ) : (
-        <div className="overflow-x-auto mt-8">
-          <table className="min-w-full table-auto">
-            <thead>
-              <tr className="bg-gray-100 border-b">
-                <th className="py-3 px-6 text-left text-sm font-semibold">Name</th>
-                <th className="py-3 px-6 text-left text-sm font-semibold">Email</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map((user) => (
-                <tr key={user.id} className="border-b hover:bg-gray-50">
-                  <td className="py-3 px-6 text-sm">{user.firstName} {user.lastName}</td>
-                  <td className="py-3 px-6 text-sm">{user.email}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <UserList users={users} />
       )}
     </div>
   );

@@ -12,16 +12,17 @@ datasource db {
 }
 
 model User {
-  id String @id @unique
-
+  id           String       @id @unique
   email        String
   firstName    String
   lastName     String
   profileImage String?
+  isAdmin      Boolean      @default(false) // Add isAdmin field with a default value of false
   Home         Home[]
   Favorite     Favorite[]
   Reservation  Reservation[]
 }
+
 
 model Home {
   id String @id @default(uuid())
