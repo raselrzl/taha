@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Hotel Taha",
+  title: "Hotel",
   description: "hotel",
 };
 

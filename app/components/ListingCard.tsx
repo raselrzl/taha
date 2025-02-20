@@ -5,6 +5,9 @@ import { useCountries } from "../lib/getCountries";
 import { ArrowBigRight, ArrowDownRight, CircleChevronDown, CircleChevronRight, Heart } from "lucide-react";
 import { AddToFavoriteButton, DeleteFromFavoriteButton } from "./SubmitButtons";
 import { DeleteFromFavorite, addToFavorite } from "../actions";
+import {
+  LoginLink
+} from "@kinde-oss/kinde-auth-nextjs/components";
 
 interface iAppProps {
   imagePath: string;
@@ -43,26 +46,33 @@ export function ListingCard({
           className="h-full object-cover"
         /> 
 
-        {userId && (
-          <div className="z-10 absolute top-2 right-2">
-            
-            {isInFavoriteList ? (
-              <form action={DeleteFromFavorite}>
-                <input type="hidden" name="favoriteId" value={favoriteId} />
-                <input type="hidden" name="userId" value={userId} />
-                <input type="hidden" name="pathName" value={pathName} />
-                <DeleteFromFavoriteButton />
-              </form>
-            ) : (
-              <form action={addToFavorite}>
-                <input type="hidden" name="homeId" value={homeId} />
-                <input type="hidden" name="userId" value={userId} />
-                <input type="hidden" name="pathName" value={pathName} />
-                <AddToFavoriteButton />
-              </form>
-            )}
-          </div>
-        )}
+{userId ? (
+  <div className="z-10 absolute top-2 right-2">
+    {isInFavoriteList ? (
+      <form action={DeleteFromFavorite}>
+        <input type="hidden" name="favoriteId" value={favoriteId} />
+        <input type="hidden" name="userId" value={userId} />
+        <input type="hidden" name="pathName" value={pathName} />
+        <DeleteFromFavoriteButton />
+      </form>
+    ) : (
+      <form action={addToFavorite}>
+        <input type="hidden" name="homeId" value={homeId} />
+        <input type="hidden" name="userId" value={userId} />
+        <input type="hidden" name="pathName" value={pathName} />
+        <AddToFavoriteButton />
+      </form>
+    )}
+  </div>
+) : (
+  <div className="z-10 absolute top-2 right-2">
+    <LoginLink className="w-full">
+        <AddToFavoriteButton />
+    </LoginLink>
+  </div>
+)}
+
+
       </div>
 
       <Link href={`/home/${homeId}`} className="mt-2">
