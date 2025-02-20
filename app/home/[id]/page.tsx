@@ -14,6 +14,13 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import Image from "next/image";
 import Link from "next/link";
 import { unstable_noStore as noStore } from "next/cache";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 async function getData(homeid: string) {
   noStore();
@@ -22,7 +29,12 @@ async function getData(homeid: string) {
       id: homeid,
     },
     select: {
-      photo: true,
+      photos: {
+        // Corrected field name from 'photo' to 'photos'
+        select: {
+          url: true, // Assuming you just want the URL of the photos
+        },
+      },
       description: true,
       guests: true,
       bedrooms: true,
@@ -63,13 +75,31 @@ export default async function HomeRoute({
   return (
     <div className="w-full sm:w-[90%] lg:w-[75%] max-w-[1200px] mx-auto mt-10 mb-12 px-4">
       <h1 className="font-medium text-2xl mb-5">{data?.title}</h1>
-      <div className="relative h-[350px] sm:h-[450px] lg:h-[550px]">
-        <Image
-          alt="Image of Home"
-          src={`https://fnozlcmlibrmmxoeelqc.supabase.co/storage/v1/object/public/images/${data?.photo}`}
-          fill
-          className="h-full object-cover w-full"
-        />
+      <div className="relative sm:h-[350px] lg:h-[550px]">
+        <Carousel>
+          {/* Carousel content with items */}
+          <CarouselContent>
+            {data?.photos?.map((photo) => (
+              <CarouselItem key={photo.url} className="flex justify-center">
+                <Image
+                  alt="Image of Home"
+                  src={`https://fnozlcmlibrmmxoeelqc.supabase.co/storage/v1/object/public/images/${photo.url}`}
+                  width={1000}
+                  height={500}
+                  className="sm:h-[350px] lg:h-[550px] object-cover w-full"
+                />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+
+          {/* Carousel navigation arrows */}
+          <CarouselPrevious className="absolute top-1/2 left-2 transform -translate-y-1/2">
+            &lt; {/* Or use an icon for previous */}
+          </CarouselPrevious>
+          <CarouselNext className="absolute top-1/2 right-2 transform -translate-y-1/2">
+            &gt; {/* Or use an icon for next */}
+          </CarouselNext>
+        </Carousel>
       </div>
 
       <div className="flex flex-col lg:flex-row justify-between gap-x-24 gap-y-8 mt-8">

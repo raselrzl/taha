@@ -32,7 +32,7 @@ model Home {
   bedrooms     String?
   bathrooms    String?
   country      String?
-  photo        String?
+  photos       Photo[]
   price        Int?
   categoryName String?
   Favorite     Favorite[]
@@ -46,6 +46,13 @@ model Home {
   User      User @relation(fields: [userId], references: [id])
   userId    String
 
+}
+
+model Photo {
+  id        String @id @default(uuid())
+  url       String
+  homeId    String
+  home      Home   @relation(fields: [homeId], references: [id])
 }
 
 model Favorite {

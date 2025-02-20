@@ -76,6 +76,77 @@ export async function CreateDescription(formData: FormData) {
   const title = formData.get("title") as string;
   const description = formData.get("description") as string;
   const price = formData.get("price");
+  const homeId = formData.get("homeId") as string;
+
+  const guestNumber = formData.get("guest") as string;
+  const roomNumber = formData.get("room") as string;
+  const bathroomsNumber = formData.get("bathroom") as string;
+
+  // Get all image files (since we are allowing multiple images)
+  const imageFiles = formData.getAll("images") as File[];
+
+  // Array to store image URLs
+  const imageUrls: string[] = [];
+
+  try {
+    // Upload each image to Supabase storage
+    for (const imageFile of imageFiles) {
+      const { data: imageData, error } = await supabase.storage
+        .from("images")
+        .upload(`${imageFile.name}-${new Date()}`, imageFile, {
+          cacheControl: "2592000",
+          contentType: imageFile.type,
+        });
+
+      if (error) {
+        console.error("Error uploading image:", error);
+        continue;  // Skip this image if there was an error
+      }
+
+      // Store the image URL
+      if (imageData?.path) {
+        imageUrls.push(imageData.path);
+      }
+    }
+
+    // If no images were uploaded, throw an error
+    if (imageUrls.length === 0) {
+      throw new Error("No images uploaded.");
+    }
+
+    // Update the Home model with multiple photos
+    await prisma.home.update({
+      where: {
+        id: homeId,
+      },
+      data: {
+        title: title,
+        description: description,
+        price: Number(price),
+        bedrooms: roomNumber,
+        bathrooms: bathroomsNumber,
+        guests: guestNumber,
+        photos: { create: imageUrls.map((url) => ({ url })) }, // Save each URL as a Photo entry
+        addedDescription: true,
+      },
+    });
+
+    // After successful update, redirect
+    return redirect(`/create/${homeId}/address`);
+
+  } catch (error) {
+    console.error("Error during the description creation:", error);
+    // Optionally handle the error in the UI, like setting an error state
+    throw error;  // Throw the error to make sure the form's action completes correctly
+  }
+}
+
+
+
+/* export async function CreateDescription(formData: FormData) {
+  const title = formData.get("title") as string;
+  const description = formData.get("description") as string;
+  const price = formData.get("price");
   const imageFile = formData.get("image") as File;
   const homeId = formData.get("homeId") as string;
 
@@ -107,7 +178,7 @@ export async function CreateDescription(formData: FormData) {
   });
 
   return redirect(`/create/${homeId}/address`);
-}
+} */
 
 export async function createLocation(formData: FormData) {
   const homeId = formData.get("homeId") as string;

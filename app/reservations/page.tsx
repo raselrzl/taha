@@ -16,7 +16,11 @@ async function getData(userId: string) {
         select: {
           id: true,
           country: true,
-          photo: true,
+          photos: { // Corrected field name from 'photo' to 'photos'
+            select: {
+              url: true, // Assuming you just want the URL of the photos
+            },
+          },
           description: true,
           price: true,
           Favorite: {
@@ -57,7 +61,7 @@ export default async function ReservationsRoute() {
               location={item.Home?.country as string}
               pathName="/favorites"
               homeId={item.Home?.id as string}
-              imagePath={item.Home?.photo as string}
+              imagePath={item.Home?.photos?.[0]?.url as string}
               price={item.Home?.price as number}
               userId={user.id}
               favoriteId={item.Home?.Favorite[0]?.id as string}

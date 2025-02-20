@@ -34,7 +34,11 @@ async function getData({
       bathrooms: searchParams?.bathroom ?? undefined,
     },
     select: {
-      photo: true,
+      photos: { // Corrected field name from 'photo' to 'photos'
+        select: {
+          url: true, // Assuming you just want the URL of the photos
+        },
+      },
       id: true,
       price: true,
       description: true,
@@ -104,7 +108,7 @@ async function ShowItems({
             <ListingCard
               key={item.id}
               description={item.description as string}
-              imagePath={item.photo as string}
+              imagePath={item.photos?.[0]?.url as string}
               location={item.country as string}
               price={item.price as number}
               userId={user?.id}

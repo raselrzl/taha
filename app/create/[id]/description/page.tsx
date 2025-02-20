@@ -51,7 +51,7 @@ export default async function DescriptionPage({ params: paramsPromise }: { param
 
           <div className="flex flex-col gap-y-2">
             <Label>Image</Label>
-            <Input name="image" type="file" required />
+            <Input name="images" type="file" required multiple />
           </div>
 
           <Card>

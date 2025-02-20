@@ -17,7 +17,11 @@ async function getData(userId: string) {
     select: {
       id: true,
       country: true,
-      photo: true,
+      photos: { // Corrected field name from 'photo' to 'photos'
+        select: {
+          url: true, // Assuming you just want the URL of the photos
+        },
+      },
       description: true,
       price: true,
       Favorite: {
@@ -56,7 +60,7 @@ export default async function MyHomes() {
           {data.map((item) => (
             <ListingCard
               key={item.id}
-              imagePath={item.photo as string}
+              imagePath={item.photos?.[0]?.url as string}
               homeId={item.id}
               price={item.price as number}
               description={item.description as string}
