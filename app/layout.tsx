@@ -29,7 +29,7 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="hotel" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Hotel Taha</title>
+        <title>Hotel</title>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
