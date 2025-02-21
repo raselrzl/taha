@@ -55,7 +55,7 @@ export function SearchModalCompnent() {
             <p className="px-4 sm:hidden">Start Your Search</p>
           </div>
 
-        <Search className="bg-primary text-white p-1 h-6 w-6 sm:h-8 sm:w-8 rounded-full" />
+        <Search className="bg-red-300 text-white p-1 h-6 w-6 sm:h-8 sm:w-8 rounded-full" />
       </div>
 
       </DialogTrigger>
