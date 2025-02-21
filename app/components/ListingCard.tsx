@@ -88,7 +88,7 @@ export function ListingCard({
           {description}
         </p>
         <p className="pt-2 text-muted-foreground">
-          <span className="font-medium text-black">${price}</span> Night
+          <span className="font-medium text-black">€{price}</span> Night
         </p>
       </Link>
     </div>

@@ -9,7 +9,7 @@ export function CaegoryShowcase({ categoryName }: { categoryName: string }) {
       <Image
         src={category?.imageUrl as string}
         alt="Caegory image"
-        width={44}
+        width={40}
         height={44}
       />
 

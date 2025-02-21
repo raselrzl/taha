@@ -21,6 +21,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { Bath, Bed, Toilet, Users } from "lucide-react";
 
 async function getData(homeid: string) {
   noStore();
@@ -104,13 +105,14 @@ export default async function HomeRoute({
 
       <div className="flex flex-col lg:flex-row justify-between gap-x-24 gap-y-8 mt-8">
         <div className="w-full lg:w-2/3">
-          <h3 className="text-xl font-medium">
+          <h3 className="text-xl font-medium flex justify-between">
             {/* {country?.flag}  */}
-            {country?.label} {/* / {country?.region} */}
+            <p>{country?.label}</p> {/* / {country?.region} */}
+            <p >€{data?.price} <span className="text-gray-600 text-sm">Night</span></p>
           </h3>
           <div className="flex flex-row gap-x-1 text-muted-foreground text-xs">
-            <p>{data?.guests} Guests</p> * <p>{data?.bedrooms} Bedrooms</p> *{" "}
-            {data?.bathrooms} Bathrooms
+            <p> <Users />{data?.guests} Guests</p>  <p> <Bed />{data?.bedrooms} Bedrooms</p> 
+            <p><Bath />{data?.bathrooms} Bathrooms</p>
           </div>
 
           <div className="flex items-center mt-6">
