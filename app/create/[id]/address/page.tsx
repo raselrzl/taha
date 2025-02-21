@@ -18,8 +18,6 @@ import { useState } from "react";
 import { useParams } from "next/navigation";
 export default function AddressRoute(/* { params }: { params: { id: string } } */) {
   const params = useParams();
-  /* console.log("params from hook:", searchParams.id); // Correct way
-  console.log("params from props:", params.id); */
   const { getAllCountries } = useCountries();
   const [locationValue, setLocationValue] = useState("");
 

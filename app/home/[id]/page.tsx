@@ -22,6 +22,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Bath, Bed, Toilet, Users } from "lucide-react";
+import DeleteHouseButton from "@/app/components/DeleteHouseButton";
 
 async function getData(homeid: string) {
   noStore();
@@ -62,6 +63,19 @@ async function getData(homeid: string) {
   return data;
 }
 
+async function getUsers() {
+  return await prisma.user.findMany({
+    select: {
+      id: true,
+      firstName: true,
+      lastName: true,
+      email: true,
+      isAdmin: true,
+      profileImage: true,
+    },
+  });
+}
+
 export default async function HomeRoute({
   params: paramsPromise,
 }: {
@@ -73,6 +87,9 @@ export default async function HomeRoute({
   const country = getCountryByValue(data?.country as string);
   const { getUser } = getKindeServerSession();
   const user = await getUser();
+
+  const users = await getUsers();
+  const adminUser = users.find((user) => user.isAdmin);
   return (
     <div className="w-full sm:w-[90%] lg:w-[75%] max-w-[1200px] mx-auto mt-10 mb-12 px-4">
       <h1 className="font-medium text-2xl mb-5">{data?.title}</h1>
@@ -108,11 +125,26 @@ export default async function HomeRoute({
           <h3 className="text-xl font-medium flex justify-between">
             {/* {country?.flag}  */}
             <p>{country?.label}</p> {/* / {country?.region} */}
-            <p >€{data?.price} <span className="text-gray-600 text-sm">Night</span></p>
+            <p>
+              €{data?.price}{" "}
+              <span className="text-gray-600 text-sm">Night</span>
+            </p>
           </h3>
           <div className="flex flex-row gap-x-1 text-muted-foreground text-xs">
-            <p> <Users />{data?.guests} Guests</p>  <p> <Bed />{data?.bedrooms} Bedrooms</p> 
-            <p><Bath />{data?.bathrooms} Bathrooms</p>
+            <p>
+              {" "}
+              <Users />
+              {data?.guests} Guests
+            </p>{" "}
+            <p>
+              {" "}
+              <Bed />
+              {data?.bedrooms} Bedrooms
+            </p>
+            <p>
+              <Bath />
+              {data?.bathrooms} Bathrooms
+            </p>
           </div>
 
           <div className="flex items-center mt-6">
@@ -157,6 +189,15 @@ export default async function HomeRoute({
             </Button>
           )}
         </form>
+
+        
+          {adminUser && user.email === adminUser.email ? (
+            <div className="mt-8">
+              {" "}
+              <DeleteHouseButton user={user} homeId={params.id} />
+            </div>
+          ) : null}
+        
       </div>
     </div>
   );

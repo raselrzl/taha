@@ -40,9 +40,6 @@ export async function UserNav() {
   const users = await getUsers();
   const adminUser = users.find(user => user.isAdmin);
 
-  console.log("Logged-in user:", user);
-  console.log("Admin user from DB:", adminUser);
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>

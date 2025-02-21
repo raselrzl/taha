@@ -1,21 +1,24 @@
-
 import Image from "next/image";
 import Link from "next/link";
 import { useCountries } from "../lib/getCountries";
-import { ArrowBigRight, ArrowDownRight, CircleChevronDown, CircleChevronRight, Heart } from "lucide-react";
+import {
+  ArrowBigRight,
+  ArrowDownRight,
+  CircleChevronDown,
+  CircleChevronRight,
+  Heart,
+} from "lucide-react";
 import { AddToFavoriteButton, DeleteFromFavoriteButton } from "./SubmitButtons";
 import { DeleteFromFavorite, addToFavorite } from "../actions";
-import {
-  LoginLink
-} from "@kinde-oss/kinde-auth-nextjs/components";
+import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 interface iAppProps {
   imagePath: string;
   description: string;
   location: string;
   price: number;
- userId: string | undefined; 
-  isInFavoriteList: boolean; 
+  userId: string | undefined;
+  isInFavoriteList: boolean;
   favoriteId: string;
   homeId: string;
   pathName: string;
@@ -37,53 +40,50 @@ export function ListingCard({
 
   return (
     <div className="flex flex-col ">
-      
       <div className="relative h-72">
         <Image
           src={`https://fnozlcmlibrmmxoeelqc.supabase.co/storage/v1/object/public/images/${imagePath}`}
           alt="Image of House"
           fill
           className="h-full object-cover rounded-md"
-        /> 
+        />
 
-{userId ? (
-  <div className="z-10 absolute top-2 right-2">
-    {isInFavoriteList ? (
-      <form action={DeleteFromFavorite}>
-        <input type="hidden" name="favoriteId" value={favoriteId} />
-        <input type="hidden" name="userId" value={userId} />
-        <input type="hidden" name="pathName" value={pathName} />
-        <DeleteFromFavoriteButton />
-      </form>
-    ) : (
-      <form action={addToFavorite}>
-        <input type="hidden" name="homeId" value={homeId} />
-        <input type="hidden" name="userId" value={userId} />
-        <input type="hidden" name="pathName" value={pathName} />
-        <AddToFavoriteButton />
-      </form>
-    )}
-  </div>
-) : (
-  <div className="z-10 absolute top-2 right-2">
-    <LoginLink className="w-full">
-        <AddToFavoriteButton />
-    </LoginLink>
-  </div>
-)}
-
-
+        {userId ? (
+          <div className="z-10 absolute top-2 right-2">
+            {isInFavoriteList ? (
+              <form action={DeleteFromFavorite}>
+                <input type="hidden" name="favoriteId" value={favoriteId} />
+                <input type="hidden" name="userId" value={userId} />
+                <input type="hidden" name="pathName" value={pathName} />
+                <DeleteFromFavoriteButton />
+              </form>
+            ) : (
+              <form action={addToFavorite}>
+                <input type="hidden" name="homeId" value={homeId} />
+                <input type="hidden" name="userId" value={userId} />
+                <input type="hidden" name="pathName" value={pathName} />
+                <AddToFavoriteButton />
+              </form>
+            )}
+          </div>
+        ) : (
+          <div className="z-10 absolute top-2 right-2">
+            <LoginLink className="w-full">
+              <AddToFavoriteButton />
+            </LoginLink>
+          </div>
+        )}
       </div>
 
       <Link href={`/home/${homeId}`} className="mt-2">
-       <div className="flex justify-between">
-
+        <div className="flex justify-between">
           <h3 className="font-medium text-base">
-          {/*  {country?.flag}  */}{country?.label} {/* / {country?.region} */}
+            {/*  {country?.flag}  */}
+            {country?.label} {/* / {country?.region} */}
           </h3>
-          <CircleChevronRight  className="text-red-300"/>
-       </div>
-        
+          <CircleChevronRight className="text-red-300" />
+        </div>
+
         <p className="text-muted-foreground text-xs line-clamp-2">
           {description}
         </p>
