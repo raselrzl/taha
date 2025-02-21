@@ -74,6 +74,11 @@ export async function UserNav() {
                     My Advertisement Lists
                   </Link>
                 </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/users" className="w-full">
+                    Users List
+                  </Link>
+                </DropdownMenuItem>
               </>
             ) : null}
 

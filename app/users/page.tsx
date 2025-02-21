@@ -1,8 +1,10 @@
 // app/users/page.tsx
 import prisma from "@/app/lib/db";
 import { UserList } from "./UserList";
+import { redirect } from "next/navigation";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
-// Fetch users on the server
+// Fetch users from the database
 async function getUsers() {
   return await prisma.user.findMany({
     select: {
@@ -18,6 +20,14 @@ async function getUsers() {
 
 export default async function UsersPage() {
   const users = await getUsers();
+
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+
+  const adminUser = users.find((dbUser) => dbUser.isAdmin && dbUser.email === user?.email);
+  if (!adminUser) {
+    return redirect("/"); 
+  }
 
   return (
     <div className="container mx-auto px-5 mt-10">
