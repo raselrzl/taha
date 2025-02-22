@@ -24,6 +24,7 @@ async function getData(userId: string) {
       },
       description: true,
       price: true,
+      title:true,
       Favorite: {
         where: {
           userId: userId,
@@ -61,6 +62,7 @@ export default async function MyHomes() {
             <ListingCard
               key={item.id}
               imagePath={item.photos?.[0]?.url as string}
+              title={item.title as string}
               homeId={item.id}
               price={item.price as number}
               description={item.description as string}

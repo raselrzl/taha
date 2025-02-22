@@ -22,6 +22,8 @@ interface iAppProps {
   favoriteId: string;
   homeId: string;
   pathName: string;
+  title:string;
+  
 }
 
 export function ListingCard({
@@ -33,6 +35,7 @@ export function ListingCard({
   favoriteId,
   homeId,
   isInFavoriteList,
+  title,
   pathName,
 }: iAppProps) {
   const { getCountryByValue } = useCountries();
@@ -78,8 +81,7 @@ export function ListingCard({
       <Link href={`/home/${homeId}`} className="mt-2">
         <div className="flex justify-between">
           <h3 className="font-medium text-base">
-            {/*  {country?.flag}  */}
-            {country?.label} {/* / {country?.region} */}
+            {title}
           </h3>
           <CircleChevronRight className="text-red-300" />
         </div>

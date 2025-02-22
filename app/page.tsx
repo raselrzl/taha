@@ -19,6 +19,7 @@ async function getData({
     guest?: string;
     room?: string;
     bathroom?: string;
+    title?:string;
   };
 }) {
   noStore();
@@ -32,6 +33,7 @@ async function getData({
       guests: searchParams?.guest ?? undefined,
       bedrooms: searchParams?.room ?? undefined,
       bathrooms: searchParams?.bathroom ?? undefined,
+      title: searchParams?.title ?? undefined,
     },
     select: {
       photos: { // Corrected field name from 'photo' to 'photos'
@@ -41,6 +43,7 @@ async function getData({
       },
       id: true,
       price: true,
+      title:true,
       description: true,
       country: true,
       Favorite: {
@@ -63,6 +66,7 @@ export default async function Home({
     guest?: string;
     room?: string;
     bathroom?: string;
+    title?:string;
   }>;
 }) {
   // Await searchParams once before accessing its properties
@@ -89,6 +93,7 @@ async function ShowItems({
     guest?: string;
     room?: string;
     bathroom?: string;
+    title?:string;
   };
 }) {
   const { getUser } = getKindeServerSession();
@@ -111,6 +116,7 @@ async function ShowItems({
               imagePath={item.photos?.[0]?.url as string}
               location={item.country as string}
               price={item.price as number}
+              title={item.title as string}
               userId={user?.id}
               favoriteId={item.Favorite[0]?.id}
               isInFavoriteList={item.Favorite.length > 0 ? true : false}

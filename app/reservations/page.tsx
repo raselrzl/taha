@@ -22,6 +22,7 @@ async function getData(userId: string) {
             },
           },
           description: true,
+          title:true,
           price: true,
           Favorite: {
             where: {
@@ -63,6 +64,7 @@ export default async function ReservationsRoute() {
               homeId={item.Home?.id as string}
               imagePath={item.Home?.photos?.[0]?.url as string}
               price={item.Home?.price as number}
+              title={item.Home?.title as string}
               userId={user.id}
               favoriteId={item.Home?.Favorite[0]?.id as string}
               isInFavoriteList={

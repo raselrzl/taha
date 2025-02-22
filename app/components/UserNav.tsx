@@ -60,7 +60,7 @@ export async function UserNav() {
         {user ? (
           <>
             {/* Check for adminUser and the logged-in user's email */}
-            {adminUser && user.email === adminUser.email ? (
+            {adminUser && user && user.email === adminUser.email ? (
               <>
                 <DropdownMenuItem>
                   <form action={createHomewithId} className="w-full">

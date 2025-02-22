@@ -190,14 +190,11 @@ export default async function HomeRoute({
           )}
         </form>
 
-        
-          {adminUser && user.email === adminUser.email ? (
-            <div className="mt-8">
-              {" "}
-              <DeleteHouseButton user={user} homeId={params.id} />
-            </div>
-          ) : null}
-        
+        {adminUser && user && user.email === adminUser.email ? (
+          <div className="mt-8">
+            <DeleteHouseButton user={user} homeId={params.id} />
+          </div>
+        ) : null}
       </div>
     </div>
   );
