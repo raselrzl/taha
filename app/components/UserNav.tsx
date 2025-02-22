@@ -79,6 +79,11 @@ export async function UserNav() {
                     Users List
                   </Link>
                 </DropdownMenuItem>
+                <DropdownMenuItem>
+              <Link href="/reservations/allreservation" className="w-full">
+                All Reservations
+              </Link>
+            </DropdownMenuItem>
               </>
             ) : null}
 
