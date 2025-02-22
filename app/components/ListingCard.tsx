@@ -22,8 +22,7 @@ interface iAppProps {
   favoriteId: string;
   homeId: string;
   pathName: string;
-  title:string;
-  
+  title: string;
 }
 
 export function ListingCard({
@@ -44,12 +43,14 @@ export function ListingCard({
   return (
     <div className="flex flex-col ">
       <div className="relative h-72">
-        <Image
-          src={`https://fnozlcmlibrmmxoeelqc.supabase.co/storage/v1/object/public/images/${imagePath}`}
-          alt="Image of House"
-          fill
-          className="h-full object-cover rounded-md"
-        />
+        <div className="overflow-hidden group">
+          <Image
+            src={`https://fnozlcmlibrmmxoeelqc.supabase.co/storage/v1/object/public/images/${imagePath}`}
+            alt="Image of House"
+            fill
+            className="h-full object-cover rounded-md transform transition-transform duration-500 ease-in-out group-hover:scale-110"
+          />
+        </div>
 
         {userId ? (
           <div className="z-10 absolute top-2 right-2">
@@ -80,9 +81,7 @@ export function ListingCard({
 
       <Link href={`/home/${homeId}`} className="mt-2">
         <div className="flex justify-between">
-          <h3 className="font-medium text-base">
-            {title}
-          </h3>
+          <h3 className="font-medium text-base">{title}</h3>
           <CircleChevronRight className="text-red-300" />
         </div>
 
