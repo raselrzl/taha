@@ -2,6 +2,7 @@ import prisma from "@/app/lib/db"; // Prisma client import
 import { redirect } from "next/navigation"; // For redirecting non-admin users
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server"; // For getting user session
 import { ReservationList } from "./ReservationList";
+import { NoItems } from "@/app/components/NoItem";
 
 // Fetch all reservations with related User and Home data
 async function getReservations() {
@@ -66,7 +67,10 @@ export default async function ReservationsPage() {
       <h2 className="text-3xl font-semibold tracking-tight text-center">All Reservations</h2>
 
       {reservations.length === 0 ? (
-        <p className="text-center mt-6">No reservations found.</p>
+        <NoItems
+        title="There is no any Reservations"
+        description="if there is reservation you will see it right here..."
+      />
       ) : (
         <ReservationList reservations={reservations} />
       )}

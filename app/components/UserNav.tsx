@@ -37,15 +37,15 @@ export async function UserNav() {
     userId: user?.id as string,
   });
 
+  // Get users list to check if the current user is admin
   const users = await getUsers();
-  const adminUser = users.find(user => user.isAdmin);
+  const isAdmin = users.some((u) => u.email === user?.email && u.isAdmin); // Check if the logged-in user is admin
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
         <div className="rounded-full border px-2 py-2 lg:px-4 lg:py-2 flex items-center gap-x-3">
           <MenuIcon className="text-red-400 w-8 h-8 lg:w-5 lg:h-5" />
-
           <img
             src={
               user?.picture ??
@@ -59,8 +59,8 @@ export async function UserNav() {
       <DropdownMenuContent align="end" className="w-[200px]">
         {user ? (
           <>
-            {/* Check for adminUser and the logged-in user's email */}
-            {adminUser && user && user.email === adminUser.email ? (
+            {/* Show admin-specific links if user is admin */}
+            {isAdmin && (
               <>
                 <DropdownMenuItem>
                   <form action={createHomewithId} className="w-full">
@@ -80,13 +80,14 @@ export async function UserNav() {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-              <Link href="/reservations/allreservation" className="w-full">
-                All Reservations
-              </Link>
-            </DropdownMenuItem>
+                  <Link href="/reservations/allreservation" className="w-full">
+                    All Reservations
+                  </Link>
+                </DropdownMenuItem>
               </>
-            ) : null}
+            )}
 
+            {/* Show user-specific links */}
             <DropdownMenuItem>
               <Link href="/favorites" className="w-full">
                 My Favorites list

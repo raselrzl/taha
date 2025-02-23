@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import { NoItems } from "../components/NoItem";
 
 // Client component (UserList.tsx)
 
@@ -65,6 +66,8 @@ export function UserList({ users }: { users: Array<any> }) {
           user.id === userId ? { ...user, isAdmin: true } : user
         )
       );
+      // Reload the page after success
+      window.location.reload();
     }
     setLoadingUserId(null); // Reset loading state
   };
@@ -79,6 +82,8 @@ export function UserList({ users }: { users: Array<any> }) {
           user.id === userId ? { ...user, isAdmin: false } : user
         )
       );
+      // Reload the page after success
+      window.location.reload();
     }
     setLoadingUserId(null); // Reset loading state
   };
@@ -86,7 +91,9 @@ export function UserList({ users }: { users: Array<any> }) {
   // Filter users based on search term
   const filteredUsers = updatedUsers.filter((user) => {
     const fullName =
-      (user.firstName || "").toLowerCase() + " " + (user.lastName || "").toLowerCase();
+      (user.firstName || "").toLowerCase() +
+      " " +
+      (user.lastName || "").toLowerCase();
     const email = (user.email || "").toLowerCase();
     const lowerSearchTerm = searchTerm.toLowerCase();
 
@@ -107,14 +114,30 @@ export function UserList({ users }: { users: Array<any> }) {
         />
       </div>
 
+      {/* Show message if no users match the search */}
+      {filteredUsers.length === 0 && searchTerm && (
+        <NoItems
+        title={`There is no any user registered by this ${searchTerm}`}
+        description="If there is a registered user, you will see it right here."
+      />
+      )}
+
       <div className="overflow-x-auto">
         <table className="min-w-full table-auto">
           <thead>
             <tr className="bg-gray-100 border-b">
-              <th className="py-3 px-6 text-left text-sm font-semibold">Name</th>
-              <th className="py-3 px-6 text-left text-sm font-semibold">Email</th>
-              <th className="py-3 px-6 text-left text-sm font-semibold">Role</th>
-              <th className="py-3 px-6 text-left text-sm font-semibold">Actions</th>
+              <th className="py-3 px-6 text-left text-sm font-semibold">
+                Name
+              </th>
+              <th className="py-3 px-6 text-left text-sm font-semibold">
+                Email
+              </th>
+              <th className="py-3 px-6 text-left text-sm font-semibold">
+                Role
+              </th>
+              <th className="py-3 px-6 text-left text-sm font-semibold">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody>

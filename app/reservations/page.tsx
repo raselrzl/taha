@@ -4,7 +4,7 @@ import { NoItems } from "../components/NoItem";
 import prisma from "../lib/db";
 import { redirect } from "next/navigation";
 import { unstable_noStore as noStore } from "next/cache";
-
+import { v4 as uuidv4 } from 'uuid';
 async function getData(userId: string) {
   noStore();
   const data = await prisma.reservation.findMany({
@@ -42,6 +42,10 @@ export default async function ReservationsRoute() {
   const user = await getUser();
   if (!user?.id) return redirect("/");
   const data = await getData(user.id);
+
+  const generateReservationId = () => {
+    return Math.floor(10000000 + Math.random() * 90000000); // Generates a random 8-digit number
+  };
   return (
     <section className="container mx-auto px-5 lg:px-10 mt-10">
       <h2 className="text-3xl font-semibold tracking-tight text-center">
@@ -55,9 +59,11 @@ export default async function ReservationsRoute() {
         />
       ) : (
         <div className="grid lg:grid-cols-4 sm:grid-cols-2 md:grid-cols-3 grid-cols-1 gap-8 mt-8">
-          {data.map((item) => (
+          {data.map((item) => {
+          const reservationId = generateReservationId();
+          return (
             <ListingCard
-              key={item.Home?.id}
+              key={uuidv4()}
               description={item.Home?.description as string}
               location={item.Home?.country as string}
               pathName="/favorites"
@@ -71,7 +77,7 @@ export default async function ReservationsRoute() {
                 (item.Home?.Favorite.length as number) > 0 ? true : false
               }
             />
-          ))}
+          )})}
         </div>
       )}
     </section>

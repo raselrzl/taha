@@ -89,7 +89,8 @@ export default async function HomeRoute({
   const user = await getUser();
 
   const users = await getUsers();
-  const adminUser = users.find((user) => user.isAdmin);
+  const isAdmin = users.some((u) => u.email === user?.email && u.isAdmin); // Check if the logged-in user is admin
+
   return (
     <div className="w-full sm:w-[90%] lg:w-[75%] max-w-[1200px] mx-auto mt-10 mb-12 px-4">
       <h1 className="font-medium text-2xl mb-5">{data?.title}</h1>
@@ -190,11 +191,11 @@ export default async function HomeRoute({
           )}
         </form>
 
-        {adminUser && user && user.email === adminUser.email ? (
-          <div className="mt-8">
-            <DeleteHouseButton user={user} homeId={params.id} />
-          </div>
-        ) : null}
+        {isAdmin && (
+        <div className="mt-8">
+          <DeleteHouseButton user={user} homeId={params.id} />
+        </div>
+      )}
       </div>
     </div>
   );

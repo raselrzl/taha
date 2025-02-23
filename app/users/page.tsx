@@ -3,6 +3,7 @@ import prisma from "@/app/lib/db";
 import { UserList } from "./UserList";
 import { redirect } from "next/navigation";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { NoItems } from "../components/NoItem";
 
 // Fetch users from the database
 async function getUsers() {
@@ -34,7 +35,10 @@ export default async function UsersPage() {
       <h2 className="text-3xl font-semibold tracking-tight text-center">All Users</h2>
 
       {users.length === 0 ? (
-        <p className="text-center mt-6">No users found.</p>
+         <NoItems
+                title="There is no any user registered"
+                description="if there is user you will see it right here..."
+              />
       ) : (
         <UserList users={users} />
       )}
