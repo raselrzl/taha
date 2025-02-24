@@ -84,7 +84,7 @@ export function SearchModalCompnent() {
                     <SelectLabel>Countries</SelectLabel>
                     {getAllCountries().map((item) => (
                       <SelectItem key={item.value} value={item.value}>
-                        {item.flag} {item.label} / {item.region}
+                        {item.label} 
                       </SelectItem>
                     ))}
                   </SelectGroup>
