@@ -1,7 +1,7 @@
 // pages/api/users/[id]/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/app/lib/db";
-
+import { unstable_noStore as noStore } from "next/cache";
 // This is the handler for API route
 export async function POST(req: NextRequest, {
   params: paramsPromise,
@@ -9,7 +9,7 @@ export async function POST(req: NextRequest, {
   params: Promise<{ id: string }>;
 }) {
   const params = await paramsPromise;
-
+ noStore();
   try {
     // Fetch the user from the database
     const user = await prisma.user.findUnique({

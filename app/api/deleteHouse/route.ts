@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/app/lib/db';
-
+import { unstable_noStore as noStore } from "next/cache";
 export async function DELETE(req: Request) {
+  noStore();
   try {
     // Log the incoming request body to debug
     const requestBody = await req.json();

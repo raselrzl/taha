@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/app/lib/db";
-
+import { unstable_noStore as noStore } from "next/cache";
 // This handles POST requests to promote a user to admin
 export async function POST(req: NextRequest, {
     params: paramsPromise,
@@ -8,7 +8,7 @@ export async function POST(req: NextRequest, {
     params: Promise<{ id: string }>;
   }) {
     const params = await paramsPromise;
-
+noStore();
   try {
     // Find the user by ID
     const user = await prisma.user.findUnique({
