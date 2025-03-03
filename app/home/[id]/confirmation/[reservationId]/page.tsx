@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import prisma from "@/app/lib/db";
 import { Button } from "@/components/ui/button";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
@@ -30,12 +29,17 @@ async function getReservationData(reservationId: string) {
   return reservation;
 }
 
+// Define a type for the params passed to the component
+interface ReservationParams {
+  id: string;
+  reservationId: string;
+}
+
 export default async function ReservationConfirmation({
   params,
 }: {
-  params: { id: string; reservationId: string };
+  params: ReservationParams;  // Explicitly define the type for params
 }) {
-  // Await the params object to safely use its properties
   const { id, reservationId } = params;
 
   const { getUser } = getKindeServerSession();
@@ -76,18 +80,12 @@ export default async function ReservationConfirmation({
       {/* Reservation Summary */}
       <div className="border p-5 rounded-lg shadow-md">
         <div className="text-center">
-          <div className="text-center">
-            <h3 className="font-medium">{userName}</h3>
-            <p className="text-sm text-muted-foreground">
-              Your Reservation details
-            </p>
-            <p className="font-medium">
-              Reservation ID: {fetchedReservationId}
-            </p>
-            <Link href={`/home/${id}`} className="text-blue-600 underline">
-              View Booking Details
-            </Link>
-          </div>
+          <h3 className="font-medium">{userName}</h3>
+          <p className="text-sm text-muted-foreground">Your Reservation details</p>
+          <p className="font-medium">Reservation ID: {fetchedReservationId}</p>
+          <Link href={`/home/${id}`} className="text-blue-600 underline">
+            View Booking Details
+          </Link>
         </div>
 
         <div className="flex justify-between items-center mb-5">
@@ -104,10 +102,7 @@ export default async function ReservationConfirmation({
             <p>{checkOutDate.toLocaleDateString()}</p>
           </div>
           <div>
-            {" "}
-            <p className="text-xl font-semibold">
-              €{homePrice} <span className="text-sm">Night</span>
-            </p>
+            <p className="text-xl font-semibold">€{homePrice} <span className="text-sm">Night</span></p>
           </div>
         </div>
 
