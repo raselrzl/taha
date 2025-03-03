@@ -2,6 +2,7 @@ import prisma from "@/app/lib/db";
 import { Button } from "@/components/ui/button";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import Link from "next/link";
+import { redirect } from "next/navigation"; // Import `redirect` from next/navigation
 
 // Fetch reservation data based on the reservationId
 async function getReservationData(reservationId: string) {
@@ -41,6 +42,11 @@ export default async function ReservationConfirmation({
 
   const { getUser } = getKindeServerSession();
   const user = await getUser();
+
+  // If no user, redirect to the homepage
+  if (!user) {
+    redirect("/"); // Redirect to homepage if no user is found
+  }
 
   // Fetch reservation details based on the reservationId
   const reservationData = await getReservationData(reservationId);
