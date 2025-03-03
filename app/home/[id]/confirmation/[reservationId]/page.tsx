@@ -29,17 +29,14 @@ async function getReservationData(reservationId: string) {
   return reservation;
 }
 
-// Define a type for the params passed to the component
-interface ReservationParams {
-  id: string;
-  reservationId: string;
-}
-
 export default async function ReservationConfirmation({
-  params,
+  params: paramsPromise,
 }: {
-  params: ReservationParams;  // Explicitly define the type for params
+  params: Promise<{ id: string; reservationId: string }>;
 }) {
+  // Await the paramsPromise to get the actual params
+  const params = await paramsPromise;
+
   const { id, reservationId } = params;
 
   const { getUser } = getKindeServerSession();
@@ -80,12 +77,18 @@ export default async function ReservationConfirmation({
       {/* Reservation Summary */}
       <div className="border p-5 rounded-lg shadow-md">
         <div className="text-center">
-          <h3 className="font-medium">{userName}</h3>
-          <p className="text-sm text-muted-foreground">Your Reservation details</p>
-          <p className="font-medium">Reservation ID: {fetchedReservationId}</p>
-          <Link href={`/home/${id}`} className="text-blue-600 underline">
-            View Booking Details
-          </Link>
+          <div className="text-center">
+            <h3 className="font-medium">{userName}</h3>
+            <p className="text-sm text-muted-foreground">
+              Your Reservation details
+            </p>
+            <p className="font-medium">
+              Reservation ID: {fetchedReservationId}
+            </p>
+            <Link href={`/home/${id}`} className="text-blue-600 underline">
+              View Booking Details
+            </Link>
+          </div>
         </div>
 
         <div className="flex justify-between items-center mb-5">
@@ -102,7 +105,9 @@ export default async function ReservationConfirmation({
             <p>{checkOutDate.toLocaleDateString()}</p>
           </div>
           <div>
-            <p className="text-xl font-semibold">€{homePrice} <span className="text-sm">Night</span></p>
+            <p className="text-xl font-semibold">
+              €{homePrice} <span className="text-sm">Night</span>
+            </p>
           </div>
         </div>
 
