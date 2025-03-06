@@ -1,6 +1,6 @@
 "use client";
 
-import { MapContainer, TileLayer, Marker } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, Tooltip } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useCountries } from "../lib/getCountries";
 import { icon } from "leaflet";
@@ -26,7 +26,11 @@ export default function Map({ locationValue }: { locationValue: string }) {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
-      <Marker position={latLang ?? [52.505, -0.09]} icon={ICON} />
+      <Marker position={latLang ?? [52.505, -0.09]} icon={ICON} >
+        <Popup>Rasel</Popup>
+        <Tooltip>Tooltip for Marker</Tooltip>
+      </Marker>
+
     </MapContainer>
   );
 }
